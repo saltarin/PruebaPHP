@@ -1,6 +1,5 @@
 <?php
 
-
 class ChangeString {
 
 	function build($cadena) {
@@ -26,23 +25,24 @@ class ChangeString {
 					$caracter = strtolower($caracter);
 				}
 				
-				if($caracter == "n")
-					$caracter = "ñ";
-				elseif(ord($caracter) == ord("ñ")) #ñ
-					$caracter = "o"; #o
-				else{
-
-					if(ord($caracter) + 1 > 122) #z
-						$caracter = chr(97);
-					else
-						$caracter = chr(ord($caracter) + 1);	
-				}
-
+				
+				if(ord($caracter) + 1 > 122) #z
+					$caracter = chr(97);
+				else
+					$caracter = chr(ord($caracter) + 1);
+				
 
 				if($regresar)
 					$caracter = strtoupper($caracter);
 			}
-
+			else{
+				
+				if(ord($caracter) == ord("Ñ"))
+					$caracter = "O";
+				elseif(ord($caracter) == ord("ñ"))
+					$caracter = "o";
+			}
+			
 
 			array_push($salida,$caracter);
 
@@ -53,7 +53,7 @@ class ChangeString {
 
 $obj = new ChangeString();
 
-$entrada = "123 abcd*3";
+$entrada = "123 abñÑcd*3";
 $salida = $obj->build($entrada);
 echo "entrada : $entrada salida : $salida<br>";
 
